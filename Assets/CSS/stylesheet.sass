@@ -1,0 +1,160 @@
+//Mixins
+////Grid
+@mixin grid ($columns, $rows, $area)
+  grid-template-columns: $columns
+  grid-template-rows: $rows
+  grid-template-areas: $area
+
+////Center Horizontally and Vertically Using grid
+@mixin grid_Vertical_Horizontal_Center
+  justify-self: center
+  align-self: center
+
+////Center Horizontally and Vertically Using Css transform
+@mixin normal_Vertical_Horizontal_Center
+  // Remember to declare parent as postion: relative
+  position: absolute
+  top: 50%
+  left: 50%
+  transform: translate(-50%, -50%)
+
+@mixin view_Height_Width
+      height: 100vh
+      width: 100vw
+
+.box
+  border 1px solid black
+  margin: 5px
+
+.center
+  @include grid_Vertical_Horizontal_Center
+
+body
+  display: grid
+  @include grid($columns: 1fr, $rows: 1fr 2fr 5fr 4fr  , $area: "header" "messages" "game" "chat")
+  height: 100vh
+  width: 100vw
+  background-color: blue
+  color: white
+  //header area
+  .header
+    grid-area: header
+    height: 100%
+    width: 100%
+    border: 1px solid black
+    display: grid
+    @include grid($columns: 2fr 5fr 2fr , $rows: 1fr , $area: ". header_Title time")
+    .header_Title
+      grid-area: header_Title
+      display: grid
+    .time
+      grid-area: time
+      display: grid
+      font-size: 3vh
+
+  //messages area
+  .messages
+    grid-area: messages
+    height: 100%
+    width: 100%
+    border: 1px solid black
+    display: grid
+    color: black
+    @include grid($columns: 1fr , $rows: 1fr 1fr , $area: "top_Message" "bottom_Message")
+    .top_Message
+      grid-area: top_Message
+      @include grid_Vertical_Horizontal_Center
+    .bottom_Message
+      grid-area: bottom_Message
+      display: grid
+      #name_Form
+        grid-area: name_Form
+        display: inline-block
+
+  // game play area
+  .game
+    display: grid
+    grid-area: game
+    height: 100%
+    width: 100%
+    border: 1px solid black
+    @include grid($columns:1fr 1fr 1fr , $rows: 1fr, $area: "player_One fight player_Two")
+    grid-column-gap: 5px
+    .player_One
+      display: grid
+      margin: 10px 0
+      grid-area: player_One
+      border: 1px solid black
+      @include grid($columns:1fr, $rows: 1fr 5fr 1fr, $area: "player_One_Choice" " waiting" "player_One_Score")
+      .waiting
+        grid-area: waiting
+        display: grid
+        text-align: center
+        h1, i
+            margin: 5px
+      .player_One_Choice
+        grid-area: player_One_Choice
+
+      .player_One_Score
+        grid-area: player_One_Score
+
+
+    .fight
+      display: grid
+      grid-area: fight
+      border: 1px solid black
+      margin: 10px 0
+
+    .player_Two
+      display: grid
+      grid-area: player_Two
+      border: 1px solid black
+      margin: 10px 0
+      @include grid($columns:1fr, $rows: 1fr 5fr 1fr, $area:  "player_Two_Choice" "waiting" "player_Two_Score")
+      .waiting
+        grid-area: waiting
+        display: grid
+        text-align: center
+        h1, i
+            margin: 5px
+      .player_Two_Choice
+        grid-area: player_One_Choice
+      .player_Two_Score
+        grid-area: player_One_Score
+  // chat area
+  .chat
+    grid-area: chat
+    height: 100%
+    width: 100%
+    border: 1px solid black
+    @include grid($columns:1fr , $rows: 5fr 1fr , $area: "messages" "message_form")
+    grid-row-gap: 5px
+    display: grid
+    color: black
+    #messages
+      grid-area: messages
+      background-color: white
+      width: 100%
+      height: 100%
+      @include grid_Vertical_Horizontal_Center
+      overflow-y: auto
+    #message_form
+      grid-area: message_form
+      display: grid
+      @include grid($columns: 1fr , $rows: 1fr , $area: "message_Input add_Message")
+      #message_Input
+        grid-area: message_Input
+      #add_Message
+        grid-area: add_Message
+
+
+
+@media only screen and (max-width: 740px)
+
+  body
+    //header area
+    .header
+      .header_Title
+      .time
+        font-size: 1vh
+        text-align: center
