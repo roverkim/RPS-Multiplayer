@@ -4,10 +4,10 @@ $(document).ready(function() {
 // Function to get Current Time
 function currentTime(){
   //Grab the current TIME
-  let timeletiable = moment().format('MMMM Do YYYY, h:mm:ss a');
+  let timeVariable = moment().format('MMMM Do YYYY, h:mm:ss a');
   //Display current date and time on the document
   let timeHTML = $("<div>").addClass("center");
-  timeHTML.html(timeletiable);
+  timeHTML.html(timeVariable);
   $(".time").html(timeHTML).css("color", "yellow");
 }
 
@@ -26,22 +26,22 @@ let config = {
   messagingSenderId: "763608117588"
 };
 
-// Global letiables
+// Global Variables
 
 let currentUser = "";
 let currentKey;
 let chatKey = "";
-let player_One;
-let player_Two;
 let fireChat;
 let fireKey;
+let numberOfUsers;
+let userConnectionKey;
 // Initalize Firebase with stored settings
 firebase.initializeApp(config);
 
-// Store Firebase reference into a databse letiable
+// Store Firebase reference into a databse Variable
 let database = firebase.database();
 
-// letiable to Store Firebase Connection reference.
+// Variable to Store Firebase Connection reference.
 let connection = database.ref("/userConnections");
 let userConnection = database.ref("/userConnections/user");
 let chatConnection = database.ref("/userConnections/chat");
@@ -50,24 +50,55 @@ let chatConnection = database.ref("/userConnections/chat");
 let connectedRef = database.ref(".info/connected");
 
 
+
+
 ///////////// Track User Connections Functionality //////////////////////////
 
 
 // Clicking the Start Button to Add a user to Firebase
 $("#add_Name").on("click", function(){
+  // Retrieve name of user
   currentUser = $("#name_Input").val();
+  // When the client's connection state changes
   connectedRef.on("value", function(fireUser) {
+    console.log("status of user: " +fireUser.val());
+
     // If connected = True
     if (fireUser.val()) {
       console.log("User Input has been stored:" + currentUser);
       // Add user to the connections list.
       userConnection.push({user: currentUser});
-      // Remove user from the connection list when they disconnect.
-      connection.onDisconnect().remove();
       // Clears user input box
       $("#name_Input").val("");
+      // Display the name of the user
       displayName();
-    }
+      // Tracks the current key of the user
+      database.ref("/userConnections/user").on("child_added",function(value){
+        userConnectionKey= value.key;
+      });
+      // Tracks the number of users currently present
+      database.ref("/userConnections/user").on("value",function(value){
+        // Store number of users
+        numberOfUsers = value.numChildren();
+        // Pass number of users into function that determines the player's position
+        playerPosition(numberOfUsers);
+      });
+
+      // Display Disconnected message
+      database.ref("/userConnections/user/").on("child_removed",function(value){
+
+        let user = value.val().user
+        $("#messages").append(user+" has disconnected </br>")
+      });
+    };// End if
+
+  database.ref("/userConnections/user/"+userConnectionKey).onDisconnect().remove();
+
+
+    // $("#messages").append("has disconnected </br>");
+
+
+  chatConnection.onDisconnect().remove();
   })
 });
 
@@ -87,14 +118,35 @@ $("#add_Message").on("click", function(){
 });
 
 
+
 // Retrieve Message from database
  database.ref("/userConnections/chat").on("child_added", function(response){
    let currentMessage = response.val().message;
    let name = response.val().user;
    //Prints name and message on screen
-   $("#messages").append(name+ ": "+ currentMessage + "</br>");
+   let messages = $("#messages")
+   messages.append(name+ ": "+ currentMessage + "</br>");
 
- });
+   // Auto Scroll Chat
+   var isScrolledToBottom = messages.scrollHeight - messages.clientHeight <= messages.scrollTop + 1;
+   if (isScrolledToBottom) {
+   messages.scrollTop = messages.scrollHeight - messages.clientHeight;;
+    }
+  });
+
+
+// // When user gets disconnected
+// database.ref("userConnections").on('child_removed', function(childSnapshot) {
+//
+//
+//
+//   $("#messages").append("has disconnected </br>")
+//
+// });
+
+
+
+
 
 
 
@@ -104,10 +156,22 @@ $("#add_Message").on("click", function(){
 
 
 //////////////////////////// Functions ////////////////////////////
-
+// Function to display current user's name
 let displayName = () => $(".top_Message").html("Welcome " + currentUser + "." + " Please wait for another player to connect.");
 
 
+// Function to determine player's position
+function playerPosition (numberOfUsers){
+  switch(numberOfUsers){
+  case 1:
+    console.log("you are player one");
+    break;
+
+  case 2:
+    console.log("you are player two");
+    break;
+  }
+};
 
 
 
