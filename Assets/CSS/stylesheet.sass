@@ -22,6 +22,11 @@
       height: 100vh
       width: 100vw
 
+
+*
+  margin: 0
+  padding: 0
+
 .box
   border 1px solid black
   margin: 5px
@@ -51,6 +56,67 @@ body
       grid-area: time
       display: grid
       font-size: 3vh
+      .hero-circle
+        width: 100px
+        height: 100px
+        margin: 0 auto
+        position: relative
+        border: 4px solid yellow
+        border-radius: 50%
+        background: url(../img/bg.png) 0 50
+        .hero-face
+          width: 100%
+          height: 100%
+        .hero-face:after
+          position: absolute
+          top: 50%
+          left: 50%
+          width: 12px
+          height: 12px
+          margin: -6px 0 0 -6px
+          background: black
+          border-radius: 6px
+          content: ""
+          display: block
+        .hero-hour
+          width: 0
+          height: 0
+          position: absolute
+          top: 50%
+          left: 50%
+          margin: -4px 0 -4px -25%
+          padding: 4px 0 4px 25%
+          background: white
+          -webkit-transform-origin: 100% 50%
+          -ms-transform-origin: 100% 50%
+          transform-origin: 100% 50%
+          border-radius: 4px 0 0 4px
+        .hero-minute
+          width: 0
+          height: 0
+          position: absolute
+          top: 50%
+          left: 50%
+          margin: -40% -3px 0
+          padding: 40% 3px 0
+          background: white
+          -webkit-transform-origin: 50% 100%
+          -ms-transform-origin: 50% 100
+          transform-origin: 50% 100%
+          border-radius: 3px 3px 0 0
+        .hero-second
+          width: 0
+          height: 0
+          position: absolute
+          top: 50%
+          left: 50%
+          margin: -40% -1px 0 0
+          padding: 40% 1px 0
+          background: white
+          -webkit-transform-origin: 50% 100%
+          -ms-transform-origin: 50% 100%
+          transform-origin: 50% 100%
+
 
   //messages area
   .messages
@@ -90,8 +156,9 @@ body
         grid-area: waiting
         display: grid
         text-align: center
-        h1, i
-            margin: 5px
+        h1
+          margin: 5px
+
       .player_One_Choice
         grid-area: player_One_Choice
 
@@ -105,22 +172,23 @@ body
       border: 1px solid black
       margin: 10px 0
 
+
     .player_Two
       display: grid
+      margin: 10px 0
       grid-area: player_Two
       border: 1px solid black
-      margin: 10px 0
       @include grid($columns:1fr, $rows: 1fr 5fr 1fr, $area:  "player_Two_Choice" "waiting" "player_Two_Score")
       .waiting
         grid-area: waiting
         display: grid
         text-align: center
-        h1, i
-            margin: 5px
+        h1
+          margin: 5px
       .player_Two_Choice
-        grid-area: player_One_Choice
+        grid-area: player_Two_Choice
       .player_Two_Score
-        grid-area: player_One_Score
+        grid-area: player_Two_Score
   // chat area
   .chat
     grid-area: chat

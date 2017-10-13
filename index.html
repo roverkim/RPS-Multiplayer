@@ -5,14 +5,20 @@
     <title>Rock Paper Sissors Multimplayer</title>
     <!-- Stylesheets -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="Assets/CSS/reset.css">
     <link rel="stylesheet" href="Assets/CSS/stylesheet.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.0/moment.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.5.0/firebase.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script src="Assets/Javascript/app.js" charset="utf_8"></script>
+    <script src="Assets/Javascript/globalVariables.js" charset="utf_8"></script>
+    <script src="Assets/Javascript/moment.js" charset="utf_8"></script>
+    <script src="Assets/Javascript/firebaseConfig.js" charset="utf_8"></script>
+    <script src="Assets/Javascript/functions.js" charset="utf_8"></script>
+    <script src="Assets/Javascript/firebaseConnection.js" charset="utf_8"></script>
+    <script src="Assets/Javascript/firebaseGame.js" charset="utf_8"></script>
+    <script src="Assets/Javascript/firebaseChat.js" charset="utf_8"></script>
   </head>
   <body>
     <!-- Header-->
@@ -22,7 +28,16 @@
           <i class = "fa fa-hand-rock-o"> Rock </i> <i class ="fa fa-hand-paper-o"> Paper </i> <i class = "fa fa-hand-scissors-o"> Scissors </i>
         </div>
       </div>
-      <div class="time"> </div>
+      <!-- Clock interface -->
+      <div class="time">
+        <div class="hero-circle">
+    			<div class="hero-face">
+    				<div id="hour" class="hero-hour"></div>
+    				<div id="minute" class="hero-minute"></div>
+    				<div id="second" class="hero-second"></div>
+    			</div>
+    		</div>
+      </div>
     </header>
 
     <!-- Messages -->
@@ -41,6 +56,7 @@
 
     <!-- Third Row -->
     <section class="game">
+      <!-- Left box -->
       <div class="player_One box">
         <div class="player_One_Choice"></div>
         <div class="waiting">
@@ -52,10 +68,14 @@
         <div class = "player_One_Score"></div>
       </div>
 
+      <!-- Middle message box -->
       <div class="fight box">
-
+        <!-- <div class="player_One_Score"></div>
+        <div class="win_Lose_Tie"></div>
+        <div class="player_Two_Score"></div> -->
       </div>
 
+      <!-- Right box -->
       <div class="player_Two box">
         <div class="player_Two_Choice"></div>
         <div class="waiting">
