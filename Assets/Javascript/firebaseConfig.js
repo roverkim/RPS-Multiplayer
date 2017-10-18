@@ -21,12 +21,19 @@ let database = firebase.database();
 // variable to Store Firebase Connection references.
 let connection = database.ref("userConnections");
 let choiceConnection =  database.ref("Choice");
-let chatConnection = database.ref("userConnections/chat");
+let chatConnection = database.ref("admin/chat");
+let nameConnection = database.ref("user");
+let userConnectionKey;
 
 // Firebase location that tracks users. Returns a boolean value
 let connectedRef = database.ref(".info/connected");
 
-let keys1Connection= database.ref("/keys1");
-let keys2Connection = database.ref("/keys2");
+// Remove connections when a user discconnects
+connection.onDisconnect().remove();
+chatConnection.onDisconnect().remove();
+choiceConnection.onDisconnect().remove();
+
+
+
 
 ////////////////////// End of Firebase Setup ///////////////////////////////////

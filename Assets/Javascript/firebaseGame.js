@@ -1,3 +1,4 @@
+
 console.log("Firebase Game is running");
 
 function retriveChoices(){
@@ -9,7 +10,9 @@ function retriveChoices(){
     playerTwoChoice = choices.val().playerTwoChoice;
 
     // Condition for calling evaluate choices function
-    if(playerOneChoice && playerTwoChoice){
+    if(playerOneChoice !== "false" && playerTwoChoice !== "false" ){
+
+      choiceConnection.once("value", (choices) =>{
 
       console.log("true");
       // Evaluates who won the game
@@ -18,11 +21,12 @@ function retriveChoices(){
       let result = $("<div>").html(matchOutcome);
 
       // Display on players screen who won the matchOutcome
-      $(".fight").html(result);
+      $(".fight").html(result).css({"text-align":"center", "verticle-align": "center"}).addClass("center");
       displayScores();
 
-      // Function call to reset the match
-      resetMatch();
+      // Function call to reset the match after 2 seconds
+      setTimeout(resetMatch, 2000);
+    });
     }; // End of condition
 
   }); // End of Event Listner

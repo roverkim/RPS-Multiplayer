@@ -1,4 +1,7 @@
+$(document).ready(function() {
+
   console.log("Firebase Connections are running")
+
 
 ///////////// Track User Connections Functionality //////////////////////////
 
@@ -7,7 +10,7 @@ $("#add_Name").on("click", function(){
 
   // call addPlayer function to display player name
   addPlayer();
-  
+
   // Call function to display current scores
   displayScores()
 
@@ -16,9 +19,11 @@ $("#add_Name").on("click", function(){
     // If user is connected, push True to database
     if(fireUser.val()){
       connection.push(true);
+      userDisconnect()
     }
 
   }); // End of connectedRef
+
 
   connection.on("value", function(fireUser) {
       // Tracks the amount of players after connectedRef pushes True
@@ -50,3 +55,6 @@ $("#add_Name").on("click", function(){
       }); // End of Connection
 
     }) // End of button click add name
+
+
+}); // End of $(document).ready()

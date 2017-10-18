@@ -20,6 +20,11 @@ let playerTwoTie = 0;
 // Variable to store the outcome of a single matchOutcome
 let matchOutcome;
 
+// Variable to store the player's name
+let playerName ="";
+
+let exists;
+
 
 // Array of potential choices
 let choices = ["rock", "paper", "scissors"]
