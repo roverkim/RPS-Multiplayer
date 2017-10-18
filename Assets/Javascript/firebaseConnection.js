@@ -1,7 +1,4 @@
-$(document).ready(function() {
-
   console.log("Firebase Connections are running")
-
 
 ///////////// Track User Connections Functionality //////////////////////////
 
@@ -20,8 +17,7 @@ $("#add_Name").on("click", function(){
     if(fireUser.val()){
       connection.push(true);
     }
-    // Remove on disconnect
-    connection.onDisconnect().remove();
+
   }); // End of connectedRef
 
   connection.on("value", function(fireUser) {
@@ -54,6 +50,3 @@ $("#add_Name").on("click", function(){
       }); // End of Connection
 
     }) // End of button click add name
-
-
-}); // End of $(document).ready()
