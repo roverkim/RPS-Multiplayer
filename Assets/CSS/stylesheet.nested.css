@@ -174,7 +174,7 @@ body {
       grid-template-rows: 1fr 2fr;
       grid-template-areas: "header_Title" "time"; }
       body .header .header_Title {
-        font-size: 4vh; }
+        font-size: 3.5vh; }
       body .header #time {
         font-size: 1vh;
         display: grid;
