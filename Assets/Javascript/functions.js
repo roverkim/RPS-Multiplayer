@@ -23,6 +23,8 @@ function addPlayer() {
 /////////////// Function to Start the Game ///////////////////////////
 
 function startGame(playerNumber) {
+
+  console.log(`player number is  ${playerNumber}`)
   // Assign user's name to variable name
   let name = $("<div>").css({"text-align": "center", "padding-top": "25px"}).text(currentUser);;
   // Create Rock Paper Scissors Choices
@@ -38,6 +40,7 @@ function startGame(playerNumber) {
   switch (playerNumber) {
       // Display player one info and choices
     case 1:
+      $('.player_Two .waiting').html('<div class="center"><h1>Waiting for player 2</h1><i class="fa fa-spinner fa-spin fa-one-large fa-fw" style="padding: 20px;"></i></div>');
       // Add player's one name and choices to DOM
       $(".player_One_Choice").html(name);
       $(".player_One > .waiting").html(rockPaperScissor);
@@ -64,11 +67,12 @@ function startGame(playerNumber) {
         database.ref("Choice").update({playerOneChoice: playerChoice});
 
         // Call function for retriving choices
-        retriveChoices();
+        retriveChoices(playerNumber, rock, paper, scissors);
       });
       break;
       // Display player two info and choices
     case 2:
+      $('.player_One .waiting').html('<div class="center"><h1>Waiting for player 1</h1><i class="fa fa-spinner fa-spin fa-one-large fa-fw" style="padding: 20px;"></i></div>');
       // Add player's 2 name and choices to DOM
       $(".player_Two_Choice").html(name);
       $(".player_Two > .waiting").html(rockPaperScissor);
@@ -94,7 +98,7 @@ function startGame(playerNumber) {
         database.ref("Choice").update({playerTwoChoice: playerChoice});
 
         // Call function for retriving choices
-        retriveChoices();
+        retriveChoices(playerNumber, rock, paper, scissors);
 
       });
       break;
@@ -186,12 +190,7 @@ function userDisconnect() {
 
 function resetMatch() {
 
-  // console.log("playernumberis" + playerNumber);
-  // console.log(`Player 1 Win ${playerOneWin} Tie ${playerOneTie} Lose ${playerOneTie}
-  //   Player 2 Win ${playerTwoWin} Tie ${playerTwoTie} Lose ${playerTwoTie}
-  // `);
-
-  //Clear Display
+  //Clear Display and Reset Waiting Css
   $(".fight").html("");
 
   startGame(playerNumber)

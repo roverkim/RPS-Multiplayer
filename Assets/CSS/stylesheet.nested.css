@@ -11,6 +11,9 @@
   justify-self: center;
   align-self: center; }
 
+.fa {
+  margin: 0 auto !important; }
+
 body {
   display: grid;
   grid-template-columns: 1fr;
