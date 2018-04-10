@@ -1,99 +1,102 @@
 <!DOCTYPE html>
 <html>
-  <head>
-      <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0" http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Rock Paper Sissors Multimplayer</title>
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="Assets/CSS/reset.css">
-    <link rel="stylesheet" href="Assets/CSS/stylesheet.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
-    <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.0/moment.min.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.5.0/firebase.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script src="Assets/Javascript/firebaseConfig.js" charset="utf_8"></script>
-    <script src="Assets/Javascript/globalVariables.js" charset="utf_8"></script>
-    <script src="Assets/Javascript/functions.js" charset="utf_8"></script>
-    <script src="Assets/Javascript/firebaseConnection.js" charset="utf_8"></script>
-    <script src="Assets/Javascript/firebaseGame.js" charset="utf_8"></script>
-    <script src="Assets/Javascript/firebaseChat.js" charset="utf_8"></script>
-    <script src="Assets/p5/p5.js"></script>
-    <script src="Assets/Javascript/clock.js" charset="utf-8"></script>
 
-  </head>
-  <body>
-    <!-- Header-->
-    <header class = "header">
-      <div class = "header_Title">
-        <div class ="center">
-          <i class = "fa fa-hand-rock-o" > Rock </i> <i class ="fa fa-hand-paper-o"> Paper </i> <i class = "fa fa-hand-scissors-o"> Scissors </i>
-        </div>
+<head>
+  <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0" http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Rock Paper Sissors Multimplayer</title>
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="Assets/CSS/reset.css">
+  <link rel="stylesheet" href="Assets/CSS/stylesheet.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.0/moment.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.5.0/firebase.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script src="Assets/p5/p5.js"></script>
+  <script src="Assets/Javascript/firebaseConfig.js" charset="utf_8"></script>
+  <script src="Assets/Javascript/globalVariables.js" charset="utf_8"></script>
+  <script src="Assets/Javascript/functions.js" charset="utf_8"></script>
+  <script src="Assets/Javascript/firebaseConnection.js" charset="utf_8"></script>
+  <script src="Assets/Javascript/firebaseGame.js" charset="utf_8"></script>
+  <script src="Assets/Javascript/firebaseChat.js" charset="utf_8"></script>
+  <script src="Assets/Javascript/clock.js" charset="utf-8"></script>
+
+</head>
+
+<body>
+  <!-- Header-->
+  <header class="header">
+    <div class="header_Title">
+      <div class="center">
+        <i class="fa fa-hand-rock-o"> Rock </i> <i class="fa fa-hand-paper-o"> Paper </i> <i class="fa fa-hand-scissors-o"> Scissors </i>
       </div>
-      <!-- Clock interface -->
-      <div id="time"></div>
-    </header>
-
-    <div class="main">
-      <!-- Messages -->
-      <section class = "messages">
-        <div class="top_Message">
-          <p>Please Enter Your Name to Begin the Game</p>
-        </div>
-
-        <div class="bottom_Message">
-          <div id="name_Form">
-            <input type="text" id="name_Input" placeholder="Name">
-            <input id="add_Name" type="submit" value="Start">
-          </div>
-        </div>
-      </section>
-
-      <!-- Third Row -->
-      <section class="game">
-        <!-- Left box -->
-        <div class="player_One box">
-          <div class="player_One_Choice"></div>
-          <div class="waiting">
-            <div class = "center">
-              <h1>Waiting for player 1</h1>
-              <i class="fa fa-spinner fa-spin fa-one-large fa-fw" style = "padding: 20px;"></i>
-            </div>
-          </div>
-          <div class = "player_One_Score"></div>
-        </div>
-
-        <!-- Middle message box -->
-        <div class="fight box">
-          <!-- <div class="player_One_Score"></div>
-          <div class="win_Lose_Tie"></div>
-          <div class="player_Two_Score"></div> -->
-        </div>
-
-        <!-- Right box -->
-        <div class="player_Two box">
-          <div class="player_Two_Choice"></div>
-          <div class="waiting">
-            <div class = "center">
-              <h1>Waiting for player 2</h1>
-              <i class="fa fa-spinner fa-spin fa-one-large fa-fw" style = "padding: 20px;"></i>
-            </div>
-          </div>
-          <div class = "player_Two_Score"></div>
-        </div>
-
-      </section>
     </div>
+    <!-- Clock interface -->
+    <div id="time"></div>
+  </header>
 
-    <!-- Forth row -->
-    <section class="chat">
-      <div id="messages"></div>
-      <div id="message_form">
-        <input type="text" id="message_Input" placeholder="Begin Typing to Send a Message.">
-        <input id="add_Message" type="submit" value="Send">
+  <div class="main">
+    <!-- Messages -->
+    <section class="messages">
+      <div class="top_Message">
+        <p>Please Enter Your Name to Begin the Game</p>
+      </div>
+
+      <div class="bottom_Message">
+        <div id="name_Form">
+          <input type="text" id="name_Input" placeholder="Name">
+          <input id="add_Name" type="submit" value="Start">
+        </div>
       </div>
     </section>
 
-  </body>
+    <!-- Third Row -->
+    <section class="game">
+      <!-- Left box -->
+      <div class="player_One box">
+        <div class="player_One_Choice"></div>
+        <div class="waiting">
+          <div class="center">
+            <h1>Waiting for player 1</h1>
+            <i class="fa fa-spinner fa-spin fa-one-large fa-fw" style="padding: 20px;"></i>
+          </div>
+        </div>
+        <div class="player_One_Score"></div>
+      </div>
+
+      <!-- Middle message box -->
+      <div class="fight box">
+        <!-- <div class="player_One_Score"></div>
+          <div class="win_Lose_Tie"></div>
+          <div class="player_Two_Score"></div> -->
+      </div>
+
+      <!-- Right box -->
+      <div class="player_Two box">
+        <div class="player_Two_Choice"></div>
+        <div class="waiting">
+          <div class="center">
+            <h1>Waiting for player 2</h1>
+            <i class="fa fa-spinner fa-spin fa-one-large fa-fw" style="padding: 20px;"></i>
+          </div>
+        </div>
+        <div class="player_Two_Score"></div>
+      </div>
+
+    </section>
+  </div>
+
+  <!-- Forth row -->
+  <section class="chat">
+    <div id="messages"></div>
+    <div id="message_form">
+      <input type="text" id="message_Input" placeholder="Begin Typing to Send a Message.">
+      <input id="add_Message" type="submit" value="Send">
+    </div>
+  </section>
+
+</body>
+
 </html>
